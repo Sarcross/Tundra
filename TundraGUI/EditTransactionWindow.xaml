@@ -1,0 +1,20 @@
+﻿<Window x:Name="EditTransactionWindow1" x:Class="TundraGUI.EditTransactionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TundraGUI"
+        mc:Ignorable="d"
+        Title="Edit Transaction - " Height="190" Width="250" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label x:Name="nameLabel" Content="Name:" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Height="25" Width="73"/>
+        <Label x:Name="descriptionLabel" Content="Description:" HorizontalAlignment="Left" Margin="20,50,0,0" VerticalAlignment="Top" Height="25"/>
+        <Label x:Name="amountLabel" Content="Amount:" HorizontalAlignment="Left" Margin="20,80,0,0" VerticalAlignment="Top" Height="25" Width="73"/>
+        <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Height="25" Margin="98,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Height="25" Margin="98,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="amountTextBox" HorizontalAlignment="Left" Height="25" Margin="98,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" PreviewTextInput="amountTextBox_PreviewTextInput"/>
+        <Button x:Name="saveButton" Content="Save" HorizontalAlignment="Left" Margin="143,110,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="saveButton_Click"/>
+        <Button x:Name="deletebutton" Content="Delete..." HorizontalAlignment="Left" Margin="20,110,0,0" VerticalAlignment="Top" Width="75" Height="25" Click="deletebutton_Click"/>
+
+    </Grid>
+</Window>

@@ -1,0 +1,415 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TundraCore.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TundraCoreStoreContainer">
+    <EntitySet Name="Users" EntityType="TundraCore.Store.Users" store:Type="Tables" Schema="TundraCore" />
+    <EntitySet Name="Accounts" EntityType="TundraCore.Store.Accounts" store:Type="Tables" Schema="TundraCore" />
+    <EntitySet Name="Goals" EntityType="TundraCore.Store.Goals" store:Type="Tables" Schema="TundraCore" />
+    <EntitySet Name="Transactions" EntityType="TundraCore.Store.Transactions" store:Type="Tables" Schema="TundraCore" />
+    <EntitySet Name="Accounts_SavingsAccount" EntityType="TundraCore.Store.Accounts_SavingsAccount" store:Type="Tables" Schema="TundraCore" />
+    <EntitySet Name="Accounts_CheckingAccount" EntityType="TundraCore.Store.Accounts_CheckingAccount" store:Type="Tables" Schema="TundraCore" />
+    <EntitySet Name="Transactions_Income" EntityType="TundraCore.Store.Transactions_Income" store:Type="Tables" Schema="TundraCore" />
+    <EntitySet Name="Transactions_Expense" EntityType="TundraCore.Store.Transactions_Expense" store:Type="Tables" Schema="TundraCore" />
+    <AssociationSet Name="UserAccount" Association="TundraCore.Store.UserAccount">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="UserGoal" Association="TundraCore.Store.UserGoal">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Goal" EntitySet="Goals" />
+    </AssociationSet>
+    <AssociationSet Name="UserTransaction" Association="TundraCore.Store.UserTransaction">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Transaction" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SavingsAccount_inherits_Account" Association="TundraCore.Store.FK_SavingsAccount_inherits_Account">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="SavingsAccount" EntitySet="Accounts_SavingsAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CheckingAccount_inherits_Account" Association="TundraCore.Store.FK_CheckingAccount_inherits_Account">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="CheckingAccount" EntitySet="Accounts_CheckingAccount" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Income_inherits_Transaction" Association="TundraCore.Store.FK_Income_inherits_Transaction">
+      <End Role="Transaction" EntitySet="Transactions" />
+      <End Role="Income" EntitySet="Transactions_Income" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Expense_inherits_Transaction" Association="TundraCore.Store.FK_Expense_inherits_Transaction">
+      <End Role="Transaction" EntitySet="Transactions" />
+      <End Role="Expense" EntitySet="Transactions_Expense" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RequiresValidation" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Accounts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Balance" Type="decimal" Nullable="false" Scale="2" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Goals">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TargetAmount" Type="decimal" Nullable="false" Scale="2" />
+    <Property Name="AcruedAmount" Type="decimal" Nullable="false" Scale="2" />
+    <Property Name="ContributionAmount" Type="decimal" Nullable="false" Scale="2" />
+    <Property Name="Accomplished" Type="bit" Nullable="false" />
+    <Property Name="Created" Type="datetime" Nullable="false" />
+    <Property Name="Deadline" Type="datetime" Nullable="false" />
+    <Property Name="Modified" Type="datetime" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transactions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Nullable="false" Scale="2" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Accounts_SavingsAccount">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Accounts_CheckingAccount">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transactions_Income">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transactions_Expense">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UserAccount">
+    <End Role="User" Type="TundraCore.Store.Users" Multiplicity="1" />
+    <End Role="Account" Type="TundraCore.Store.Accounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserGoal">
+    <End Role="User" Type="TundraCore.Store.Users" Multiplicity="1" />
+    <End Role="Goal" Type="TundraCore.Store.Goals" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Goal">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UserTransaction">
+    <End Role="User" Type="TundraCore.Store.Users" Multiplicity="1" />
+    <End Role="Transaction" Type="TundraCore.Store.Transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SavingsAccount_inherits_Account">
+    <End Role="Account" Type="TundraCore.Store.Accounts" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SavingsAccount" Type="TundraCore.Store.Accounts_SavingsAccount" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SavingsAccount">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CheckingAccount_inherits_Account">
+    <End Role="Account" Type="TundraCore.Store.Accounts" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CheckingAccount" Type="TundraCore.Store.Accounts_CheckingAccount" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CheckingAccount">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Income_inherits_Transaction">
+    <End Role="Transaction" Type="TundraCore.Store.Transactions" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Income" Type="TundraCore.Store.Transactions_Income" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Transaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Income">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Expense_inherits_Transaction">
+    <End Role="Transaction" Type="TundraCore.Store.Transactions" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Expense" Type="TundraCore.Store.Transactions_Expense" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Transaction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Expense">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="TundraCore" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="TundraContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Users" EntityType="TundraCore.User" />
+          <EntitySet Name="Accounts" EntityType="TundraCore.Account" />
+          <EntitySet Name="Goals" EntityType="TundraCore.Goal" />
+          <EntitySet Name="Transactions" EntityType="TundraCore.Transaction" />
+          <AssociationSet Name="UserAccount" Association="TundraCore.UserAccount">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="UserGoal" Association="TundraCore.UserGoal">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Goal" EntitySet="Goals" />
+          </AssociationSet>
+          <AssociationSet Name="UserTransaction" Association="TundraCore.UserTransaction">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" />
+          <Property Name="RequiresValidation" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Accounts" Relationship="TundraCore.UserAccount" FromRole="User" ToRole="Account" />
+          <NavigationProperty Name="Goals" Relationship="TundraCore.UserGoal" FromRole="User" ToRole="Goal" />
+          <NavigationProperty Name="Transactions" Relationship="TundraCore.UserTransaction" FromRole="User" ToRole="Transaction" />
+        </EntityType>
+        <EntityType Name="Account" Abstract="true">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Balance" Type="Decimal" Nullable="false" Scale="2" />
+          <NavigationProperty Name="User" Relationship="TundraCore.UserAccount" FromRole="Account" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SavingsAccount" BaseType="TundraCore.Account" />
+        <EntityType Name="CheckingAccount" BaseType="TundraCore.Account" />
+        <EntityType Name="Goal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="TargetAmount" Type="Decimal" Nullable="false" Scale="2" />
+          <Property Name="AcruedAmount" Type="Decimal" Nullable="false" Scale="2" />
+          <Property Name="ContributionAmount" Type="Decimal" Nullable="false" Scale="2" />
+          <Property Name="Accomplished" Type="Boolean" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" />
+          <Property Name="Deadline" Type="DateTime" Nullable="false" />
+          <Property Name="Modified" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="TundraCore.UserGoal" FromRole="Goal" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transaction" Abstract="true">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Scale="2" />
+          <NavigationProperty Name="User" Relationship="TundraCore.UserTransaction" FromRole="Transaction" ToRole="User" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Income" BaseType="TundraCore.Transaction" />
+        <EntityType Name="Expense" BaseType="TundraCore.Transaction" />
+        <Association Name="UserAccount">
+          <End Type="TundraCore.User" Role="User" Multiplicity="1" />
+          <End Type="TundraCore.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserGoal">
+          <End Type="TundraCore.User" Role="User" Multiplicity="1" />
+          <End Type="TundraCore.Goal" Role="Goal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Goal">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserTransaction">
+          <End Type="TundraCore.User" Role="User" Multiplicity="1" />
+          <End Type="TundraCore.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TundraCoreStoreContainer" CdmEntityContainer="TundraContext">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(TundraCore.User)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="RequiresValidation" ColumnName="RequiresValidation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="IsTypeOf(TundraCore.Account)">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(TundraCore.SavingsAccount)">
+        <MappingFragment StoreEntitySet="Accounts_SavingsAccount">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(TundraCore.CheckingAccount)">
+        <MappingFragment StoreEntitySet="Accounts_CheckingAccount">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Goals">
+      <EntityTypeMapping TypeName="IsTypeOf(TundraCore.Goal)">
+        <MappingFragment StoreEntitySet="Goals">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="TargetAmount" ColumnName="TargetAmount" />
+          <ScalarProperty Name="AcruedAmount" ColumnName="AcruedAmount" />
+          <ScalarProperty Name="ContributionAmount" ColumnName="ContributionAmount" />
+          <ScalarProperty Name="Accomplished" ColumnName="Accomplished" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+          <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transactions">
+      <EntityTypeMapping TypeName="IsTypeOf(TundraCore.Transaction)">
+        <MappingFragment StoreEntitySet="Transactions">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(TundraCore.Income)">
+        <MappingFragment StoreEntitySet="Transactions_Income">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(TundraCore.Expense)">
+        <MappingFragment StoreEntitySet="Transactions_Expense">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="DefaultDatabaseSchema" Value="TundraCore" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
